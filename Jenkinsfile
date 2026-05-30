@@ -16,7 +16,7 @@ pipeline {
     
     stage('Docker Build') {
       steps {
-        sh 'docker build -t docker.io/JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
+        sh 'docker build -t docker.io/julianafranco140/spring-petclinic:gestion-udem-jenkins .'
       }
     }
     
