@@ -14,7 +14,7 @@ pipeline {
         sh 'mvn clean' 
       }
     }
-    stage('Docker Build') install{
+    stage('Docker Build'){
       agent any
       steps {
         sh 'docker build -t JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
