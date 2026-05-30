@@ -15,7 +15,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t <docker-username>/spring-petclinic:gestion-udem-jenkins .'
+        sh 'docker build -t JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
       }
     }
   }
