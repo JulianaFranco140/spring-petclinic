@@ -25,7 +25,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push <docker-username>/spring-petclinic:gestion-udem-jenkins'
+          sh 'docker push JulianaFranco140/spring-petclinic:gestion-udem-jenkins'
         }
       }
     }
