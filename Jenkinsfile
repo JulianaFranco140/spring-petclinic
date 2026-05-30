@@ -3,7 +3,6 @@
 pipeline {
   agent any 
 
-
   tools {
     maven 'Maven 3' 
   }
@@ -17,15 +16,16 @@ pipeline {
     
     stage('Docker Build') {
       steps {
-        sh 'docker build -t JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
+        sh 'docker build -t docker.io/JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
       }
     }
     
     stage('Docker Push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push JulianaFranco140/spring-petclinic:gestion-udem-jenkins'
+          sh "echo \"${env.dockerHubPassword}\" | docker login -u \"${env.dockerHubUser}\" --password-stdin docker.io"
+          
+          sh 'docker push docker.io/julianafranco140/spring-petclinic:gestion-udem-jenkins'
         }
       }
     }
