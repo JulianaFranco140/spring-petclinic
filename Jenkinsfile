@@ -1,27 +1,23 @@
 #!groovy
 
 pipeline {
-  agent none
+
+  agent any 
+
   stages {
     stage('Maven Install') {
-      agent {
-        docker {
-          image 'maven:3.9-eclipse-temurin-25' 
-          reuseNode true
-        }
-      }
       steps {
-        sh 'mvn clean' 
+        sh 'mvn clean package -DskipTests' 
       }
     }
-    stage('Docker Build'){
-      agent any
+    
+    stage('Docker Build') {
       steps {
         sh 'docker build -t JulianaFranco140/spring-petclinic:gestion-udem-jenkins .'
       }
     }
+    
     stage('Docker Push') {
-      agent any
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
